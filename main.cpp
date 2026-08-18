@@ -1,8 +1,9 @@
 #include "raylib.h"
-#include "headers/AppWindow.h"
+#include "ApplicationStuff/AppWindow.h"
 
 int main()
 {
-    AppWindow window(1920, 1080, 120);
+    AppWindow window(1920, 1080, 60);
     window.createWindow();
+    window.run(); 
 }

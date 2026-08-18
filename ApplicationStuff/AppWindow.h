@@ -6,6 +6,7 @@ class AppWindow
 {
 public:
     void createWindow();
+    void run();
     AppWindow(int width, int height, int fps) : m_screenWidth(width), m_screenHeight(height), m_targetFPS(fps){}
     ~AppWindow(){}
 private:
