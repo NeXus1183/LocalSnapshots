@@ -9,26 +9,32 @@ void AppWindow::createWindow()
 void AppWindow::run()
 {
     SceneManager sceneManager;
+    curState = Intro;
+    
     while (!WindowShouldClose())    // Detect window close button or ESC key
     {
         //Logic functions here
         //Vector2 mousePos = GetMousePosition();
-        sceneManager.changeScene();
-        if (sceneManager.curScene() == 0)
+        switch (sceneManager.curScene())
         {
-            sceneManager.timerCountdown();
+        case 1:
+            curState = Menu;
+            break;
+        case 2:
+            curState = Menu;
+            break;
+        default:
+            break;
         }
+
+        if (curState == Intro)
+        {
+            sceneManager.timerCountdownIntro();
+        }
+        
         BeginDrawing();
         //Draw related functions here
-        if (sceneManager.curScene() == 0)
-        {
-            ClearBackground(RAYWHITE);
-            DrawText("A Game for Gauntlent Mini", m_screenWidth/2 - 275, m_screenHeight/2, 40, BLACK);
-        }
-        else
-        {
-            sceneManager.scenePlay();
-        }
+        sceneManager.scenePlay();
         EndDrawing(); 
     }   
     CloseWindow();  

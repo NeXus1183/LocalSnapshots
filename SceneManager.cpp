@@ -1,10 +1,16 @@
 #include "SceneManager.h"
 
-void SceneManager::timerCountdown()
+int SceneManager::curScene()
+{
+    return m_curScene;
+}
+
+void SceneManager::timerCountdownIntro()
 {
     if (m_introTimer > 0)
     {
         m_introTimer -= GetFrameTime();
+        std::cout << m_introTimer << std::endl;
     }
     else
     {
@@ -13,22 +19,39 @@ void SceneManager::timerCountdown()
     
 }
 
-int SceneManager::curScene()
-{
-    return m_curScene;
-    std::cout << m_curScene << std::endl;
-}
-
-void SceneManager::loadScene()
-{
-    
-}
-
 void SceneManager::scenePlay()
 {
-    std::cout << m_curScene << std::endl;
-    auto it = m_sceneList.find(m_curScene);
-    it->second->sceneRender();    
+    ClearBackground(RAYWHITE);
+    if (m_curScene == 0)
+    {
+        ClearBackground(RAYWHITE);
+        DrawText("A Game for Gauntlent Mini", GetScreenWidth()/2 - 275, GetScreenHeight()/2, 40, BLACK);
+    }
+    else if (m_curScene == 1)
+    {
+        DrawRectangle(0, 0, GetScreenWidth(), GetScreenHeight(), PURPLE);
+        DrawText("Main Menu SCREEN", 20, 20, 40, MAROON);
+    }
+    else if (m_curScene == 2)
+    {
+        DrawRectangle(0, 0, GetScreenWidth(), GetScreenHeight(), PURPLE);
+        DrawText("Tutorial SCREEN", 20, 20, 40, MAROON);
+    }
+    else if (m_curScene == 3)
+    {
+        DrawRectangle(0, 0, GetScreenWidth(), GetScreenHeight(), PURPLE);
+        DrawText("Kuala Lumpur SCREEN", 20, 20, 40, MAROON);
+    }
+    else if (m_curScene == 4)
+    {
+        DrawRectangle(0, 0, GetScreenWidth(), GetScreenHeight(), PURPLE);
+        DrawText("Taman Negara SCREEN", 20, 20, 40, MAROON);
+    }
+     else if (m_curScene == 5)
+    {
+        DrawRectangle(0, 0, GetScreenWidth(), GetScreenHeight(), PURPLE);
+        DrawText("END SCREEN", 20, 20, 40, MAROON);
+    }
 }
 
 void SceneManager::changeScene()
@@ -66,11 +89,10 @@ void SceneManager::changeScene()
 
 SceneManager::SceneManager()
 {
-    m_sceneList.insert({1, std::make_unique<MainMenuScene>("MainMenu", GetScreenWidth(), GetScreenHeight())});
-    m_sceneList.insert({2, std::make_unique<EndScene>("End", GetScreenWidth(), GetScreenHeight())});
-    m_sceneList.insert({3, std::make_unique<KualaLumpurScene>("Kuala Lumpur", GetScreenWidth(), GetScreenHeight())});
-    m_sceneList.insert({4, std::make_unique<PenangScene>("Penang", GetScreenWidth(), GetScreenHeight())});
-}
+    m_curScene = 0;
+    m_introTimer = 3;
+};
+
 SceneManager::~SceneManager()
 {
 

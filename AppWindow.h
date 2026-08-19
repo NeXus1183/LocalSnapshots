@@ -3,6 +3,14 @@
 #include "raylib.h"
 #include "SceneManager.h"
 
+enum GameState
+{
+    Intro,
+    Menu,
+    Play,
+    End,
+};
+
 class AppWindow
 {
 public:
@@ -16,4 +24,5 @@ private:
     const int m_screenWidth;
     const int m_screenHeight;
     const int m_targetFPS;
+    GameState curState;
 };
