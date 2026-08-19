@@ -7,8 +7,10 @@ class GameObjectManager
 {
 public:
     void addObject(GameObject newObject);
-    GameObjectManager();
+    GameObjectManager() = delete;
     ~GameObjectManager();
+    GameObjectManager(const GameObjectManager&) = delete;             // forbid copying: two owners would
+    GameObjectManager& operator=(const GameObjectManager&) = delete;
 private:
     std::map<int, GameObject> gameObjectList;
 };

@@ -5,6 +5,8 @@
 #include "raylib.h"
 #include "Scene.h"
 #include "MainMenuScene.h"
+#include "KualaLumpurScene.h"
+#include "PenangScene.h"
 #include "EndScene.h"
 
 class SceneManager

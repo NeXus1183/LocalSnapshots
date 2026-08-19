@@ -16,4 +16,5 @@ private:
     std::string m_sceneName;
     int m_screenWidth;
     int m_screenHeight;
+    bool m_hasTimer;
 };

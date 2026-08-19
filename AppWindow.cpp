@@ -14,7 +14,6 @@ void AppWindow::run()
         //Logic functions here
         //Vector2 mousePos = GetMousePosition();
         sceneManager.changeScene();
-        std::cout << sceneManager.curScene() << std::endl;
         if (sceneManager.curScene() == 0)
         {
             sceneManager.timerCountdown();
@@ -28,10 +27,8 @@ void AppWindow::run()
         }
         else
         {
-            ClearBackground(RAYWHITE);
             sceneManager.scenePlay();
         }
-        
         EndDrawing(); 
     }   
     CloseWindow();  

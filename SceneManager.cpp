@@ -46,10 +46,12 @@ void SceneManager::changeScene()
     else if(IsKeyPressed(KEY_THREE))
     {
         std::cout << "Current Selection is: Scene 3" << std::endl;
+        m_curScene = 3;
     }
     else if(IsKeyPressed(KEY_FOUR))
     {
         std::cout << "Current Selection is: Scene 4" << std::endl;
+        m_curScene = 4;
     }
     else if(IsKeyPressed(KEY_FIVE))
     {
@@ -65,7 +67,9 @@ void SceneManager::changeScene()
 SceneManager::SceneManager()
 {
     m_sceneList.insert({1, std::make_unique<MainMenuScene>("MainMenu", GetScreenWidth(), GetScreenHeight())});
-    m_sceneList.insert({2, std::make_unique<EndScene>("EndScene", GetScreenWidth(), GetScreenHeight())});
+    m_sceneList.insert({2, std::make_unique<EndScene>("End", GetScreenWidth(), GetScreenHeight())});
+    m_sceneList.insert({3, std::make_unique<KualaLumpurScene>("Kuala Lumpur", GetScreenWidth(), GetScreenHeight())});
+    m_sceneList.insert({4, std::make_unique<PenangScene>("Penang", GetScreenWidth(), GetScreenHeight())});
 }
 SceneManager::~SceneManager()
 {
