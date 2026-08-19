@@ -1,5 +1,5 @@
 #include "raylib.h"
-#include "ApplicationStuff/AppWindow.h"
+#include "AppWindow.h"
 
 int main()
 {

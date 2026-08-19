@@ -1,7 +1,7 @@
 #pragma once
 #include <map>
 #include "raylib.h"
-#include "GameObjectStuff/GameObject.h"
+#include "GameObject.h"
 
 class GameObjectManager
 {
