@@ -8,6 +8,8 @@ class AppWindow
 public:
     void createWindow();
     void run();
+    int screenWidth() const;
+    int screenHeight() const;
     AppWindow(int width, int height, int fps) : m_screenWidth(width), m_screenHeight(height), m_targetFPS(fps){}
     ~AppWindow(){}
 private:

@@ -4,13 +4,13 @@
 #include "Scene.h"
 #include "raylib.h"
 
-class MainMenuScene : public Scene
+class EndScene : public Scene
 {
 public:
     void sceneLogic() override;
     void sceneRender() override;
-    MainMenuScene(std::string name, int width, int height) : Scene(name, width, height){}
-    ~MainMenuScene(){}
+    EndScene(std::string name, int width, int height) : Scene(name, width, height){};
+    ~EndScene(){};
 private:
     /* data */
 };

@@ -3,7 +3,7 @@
 
 int main()
 {
-    AppWindow window(1920, 1080, 60);
+    AppWindow window(1600, 720, 90);
     window.createWindow();
     window.run(); 
 }
