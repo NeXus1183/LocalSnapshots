@@ -2,9 +2,10 @@
 #include <map>
 #include <iostream>
 #include <memory>
+#include <vector>
 #include "raylib.h"
 #include "textureLoader.h"
-
+#include "GameObject.h"
 class SceneManager
 {
 public:
@@ -24,4 +25,5 @@ private:
     float m_spawnTimer;
     textureLoader texLoader;
     int m_score;
+    std::vector<GameObject> gameObjectList;
 };
