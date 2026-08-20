@@ -1,5 +1,10 @@
 #include "SceneManager.h"
 
+void SceneManager::deallocate()
+{
+    texLoader.unloadAllTexture();
+}
+
 int SceneManager::curScene()
 {
     return m_curScene;
@@ -14,11 +19,30 @@ void SceneManager::timerCountdownIntro()
     }
     else
     {
-        m_curScene = 1;
+        changeScene();
     }
     
 }
 
+void SceneManager::timerCountdownGame()
+{
+    if (m_gameTimer > 0)
+    {
+        m_gameTimer -= GetFrameTime();
+        std::cout << m_gameTimer << std::endl;
+    }
+    else
+    {
+        changeScene();
+    }
+}
+
+void SceneManager::resetValues()
+{
+    m_gameTimer = 120;
+    m_score = 0;
+    m_spawnTimer = 2;
+}
 void SceneManager::scenePlay()
 {
     ClearBackground(RAYWHITE);
@@ -29,25 +53,29 @@ void SceneManager::scenePlay()
     }
     else if (m_curScene == 1)
     {
-        DrawRectangle(0, 0, GetScreenWidth(), GetScreenHeight(), PURPLE);
-        DrawText("Main Menu SCREEN", 20, 20, 40, MAROON);
+        int xOffsetText = 200;
+        int yOffsetText = 80;
+        DrawRectangle(0, 0, GetScreenWidth(), GetScreenHeight(), GREEN);
+        DrawText("Main Menu SCREEN", 20, 20, 40, BLACK);  
+        DrawText("CLICK TO START", GetScreenWidth()/2 - xOffsetText, GetScreenHeight() - yOffsetText, 40, BLACK);  
     }
     else if (m_curScene == 2)
     {
-        DrawRectangle(0, 0, GetScreenWidth(), GetScreenHeight(), PURPLE);
-        DrawText("Tutorial SCREEN", 20, 20, 40, MAROON);
+        DrawRectangle(0, 0, GetScreenWidth(), GetScreenHeight(), GRAY);
+        DrawText("TUTORIAL", 20, 20, 40, MAROON);
     }
     else if (m_curScene == 3)
     {
-        DrawRectangle(0, 0, GetScreenWidth(), GetScreenHeight(), PURPLE);
-        DrawText("Kuala Lumpur SCREEN", 20, 20, 40, MAROON);
-    }
-    else if (m_curScene == 4)
-    {
-        DrawRectangle(0, 0, GetScreenWidth(), GetScreenHeight(), PURPLE);
+        
+        Rectangle rainforestRec = {0.0f, 0.0f, (float)GetScreenWidth(), (float)GetScreenHeight()};
+        Rectangle rainforestTexRec = {0.0f, 0.0f, (float)texLoader.findTexture("rainforest").width, (float)texLoader.findTexture("rainforest").height};
+        DrawTexturePro(texLoader.findTexture("rainforest"), rainforestTexRec, rainforestRec, {0, 0}, 0, RAYWHITE);
+        Rectangle cameraRec = {GetMousePosition().x - 350/2, GetMousePosition().y - 200/2, 350, 200};
+        Rectangle cameraTexRec = {0.0f, 0.0f, (float)texLoader.findTexture("camera").width, (float)texLoader.findTexture("camera").height};
+        DrawTexturePro(texLoader.findTexture("camera"), cameraTexRec, cameraRec, {0, 0}, 0, RAYWHITE);
         DrawText("Taman Negara SCREEN", 20, 20, 40, MAROON);
     }
-     else if (m_curScene == 5)
+     else if (m_curScene == 4)
     {
         DrawRectangle(0, 0, GetScreenWidth(), GetScreenHeight(), PURPLE);
         DrawText("END SCREEN", 20, 20, 40, MAROON);
@@ -56,33 +84,36 @@ void SceneManager::scenePlay()
 
 void SceneManager::changeScene()
 {
-    if(IsKeyPressed(KEY_ONE))
+    switch (m_curScene)
     {
-        std::cout << "Current Selection is: Scene 1" << std::endl;
-        m_curScene = 1;
-    }
-    else if(IsKeyPressed(KEY_TWO))
-    {
-        std::cout << "Current Selection is: Scene 2" << std::endl;
-        m_curScene = 2;
-    }
-    else if(IsKeyPressed(KEY_THREE))
-    {
-        std::cout << "Current Selection is: Scene 3" << std::endl;
-        m_curScene = 3;
-    }
-    else if(IsKeyPressed(KEY_FOUR))
-    {
-        std::cout << "Current Selection is: Scene 4" << std::endl;
+    case 1:
+        if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT))
+        {
+            std::cout << "LMB pressed" << std::endl;
+            m_curScene = 2;
+        }
+        break;
+    case 2:
+        if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT))
+        {
+            std::cout << "RMB pressed" << std::endl;
+            m_curScene = 3;
+        }
+        break;
+    case 3:
         m_curScene = 4;
-    }
-    else if(IsKeyPressed(KEY_FIVE))
-    {
-        std::cout << "Current Selection is: Scene 5" << std::endl;
-    }
-    else if(IsKeyPressed(KEY_SIX))
-    {
-       std::cout << "Current Selection is: Scene 6" << std::endl;
+        break;
+    case 4:
+        if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT))
+        {
+            std::cout << "LMB pressed" << std::endl;
+            resetValues();
+            m_curScene = 1;
+        }
+        break;
+    default:
+       m_curScene = 1;
+       break;
     }
 }
 
@@ -91,6 +122,7 @@ SceneManager::SceneManager()
 {
     m_curScene = 0;
     m_introTimer = 3;
+    resetValues();
 };
 
 SceneManager::~SceneManager()

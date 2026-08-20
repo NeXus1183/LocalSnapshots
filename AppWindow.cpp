@@ -9,7 +9,6 @@ void AppWindow::createWindow()
 void AppWindow::run()
 {
     SceneManager sceneManager;
-    curState = Intro;
     
     while (!WindowShouldClose())    // Detect window close button or ESC key
     {
@@ -17,26 +16,22 @@ void AppWindow::run()
         //Vector2 mousePos = GetMousePosition();
         switch (sceneManager.curScene())
         {
-        case 1:
-            curState = Menu;
+        case 0:
+            sceneManager.timerCountdownIntro();
             break;
-        case 2:
-            curState = Menu;
+        case 3:
+            sceneManager.timerCountdownGame();
             break;
         default:
+            sceneManager.changeScene();
             break;
         }
-
-        if (curState == Intro)
-        {
-            sceneManager.timerCountdownIntro();
-        }
-        
         BeginDrawing();
         //Draw related functions here
         sceneManager.scenePlay();
         EndDrawing(); 
     }   
+    sceneManager.deallocate();
     CloseWindow();  
 }
 
