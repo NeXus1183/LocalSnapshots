@@ -185,7 +185,8 @@ void SceneManager::scenePlay()
      else if (m_curScene == 4)
     {
         DrawRectangle(0, 0, GetScreenWidth(), GetScreenHeight(), GRAY);
-        DrawText(TextFormat("Your final score is: %i", m_score), GetScreenWidth()/2 + 800, GetScreenHeight()/2 + 200, 40, BLACK);
+        DrawText("GAME OVER", 20, 20, 40, BLACK);
+        DrawText(TextFormat("Your final score is: %i", m_score), GetScreenWidth()/2 - 500, GetScreenHeight()/2 + 200, 40, BLACK);
     }
 }
 
